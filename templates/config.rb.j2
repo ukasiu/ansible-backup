@@ -1,10 +1,10 @@
 # encoding: utf-8
 
-##
+##s
 # Backup v4.x Configuration
 #
-# Documentation: http://meskyanichi.github.io/backup
-# Issue Tracker: https://github.com/meskyanichi/backup/issues
+# Documentation: http://backup.github.io/backup/v4/
+# Issue Tracker: https://github.com/backup/backup/issues
 
 {% if backup_notifier is defined %}
 {% if backup_notifier.slack is defined %}
@@ -98,8 +98,7 @@ end
 
 {% if backup_store.S3 is defined %}
 Storage::S3.defaults do |s3|
-  s3.access_key_id     = '{{ backup_store.S3.access_key_id }}'
-  s3.secret_access_key = '{{ backup_store.S3.secret_access_key }}'
+  s3.use_iam_profile   = true
   s3.region            = '{{ backup_store.S3.region }}'
   s3.bucket            = '{{ backup_store.S3.bucket }}'
   s3.path              = '{{ backup_store.S3.path }}'

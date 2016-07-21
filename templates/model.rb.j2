@@ -13,6 +13,13 @@ TemplateModel.new(:{{ item.key }}, "{{ microservice_name }} {{ microservice_env 
   end
 {% endif %}
 
+{% if backup.local.path is defined %}
+  store_with Local do |local|
+    local.path = '{{ backup.local.path }}'
+    local.keep = "{{ backup.keep }}"
+  end
+{% endif %}
+
 {% if backup.archives is defined %}
   archive :archive do |archive|
 {% for archive in backup.archives.add %}
