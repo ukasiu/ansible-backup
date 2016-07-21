@@ -53,4 +53,12 @@ TemplateModel.new(:{{ item.key }}, "{{ microservice_name }} {{ microservice_env 
 {% endfor %}
 {% endif %}
 
+{% if backup.mysql is defined %}
+{% for database in backup.mysql %}
+  database MySQL, :{{ database }} do |db|
+    db.name               = "{{ database }}"
+  end
+{% endfor %}
+{% endif %}
+
 end

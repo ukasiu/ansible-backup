@@ -23,6 +23,11 @@ backup_databases:
     ipv6: 'false'
     lock: 'true'
     additional_options: "[]"
+  MySQL:
+    host: "localhost"
+    port: 3306
+    username: "root"
+    password: "root"
 
 backup_encryption: []
 
@@ -37,4 +42,3 @@ backup_jobs:
 
 backup_ruby_package: ruby
 backup_ruby_dev_package: ruby-dev
-

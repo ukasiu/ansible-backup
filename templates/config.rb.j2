@@ -68,6 +68,16 @@ Database::MongoDB.defaults do |db|
 end
 {% endif %}
 
+{% if backup_databases.MySQL is defined %}
+Database::MySQL.defaults do |db|
+  db.username           = "{{ backup_databases.MySQL.username }}"
+  db.password           = "{{ backup_databases.MySQL.password }}"
+  db.host               = "{{ backup_databases.MySQL.host }}"
+  db.port               = {{ backup_databases.MySQL.port }}
+  db.additional_options = ["--quick", "--single-transaction"]
+end
+{% endif %}
+
 {% if backup_encryption.OpenSSL is defined %}
 Encryptor::OpenSSL.defaults do |encryption|
   encryption.password = '{{ backup_encryption.OpenSSL.password }}'
