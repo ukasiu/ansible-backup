@@ -28,6 +28,7 @@
     - flex
     - gettext
     - ncurses-dev
+    - zlib1g-dev
 
 - name: Install gem backup
   gem:
