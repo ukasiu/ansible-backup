@@ -40,5 +40,5 @@ backup_jobs:
     schedule: ""
     keep: ""
 
-backup_ruby_package: ruby
-backup_ruby_dev_package: ruby-dev
+backup_ruby_package: ruby2.3
+backup_ruby_dev_package: ruby-dev2.3

@@ -1,4 +1,7 @@
 ---
+- name: Setup BrightBox PPA for ruby php_packages
+  apt_repository:
+    repo: "ppa:brightbox/ruby-ng"
 
 - name: ruby | Install
   apt:
