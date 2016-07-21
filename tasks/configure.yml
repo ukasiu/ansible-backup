@@ -12,6 +12,7 @@
     - "{{ backup_setup.tmp_dir }}"
     - "{{ backup_setup.data_dir }}"
     - "{{ backup_setup.log_dir }}"
+    - "{{ backup_setup.local_store }}"
 
 - name: Configure backups config
   template:
@@ -20,7 +21,6 @@
     owner: "{{ backup_setup.user }}"
     group: "{{ backup_setup.user }}"
     mode:  0600
-  tags: backup_configure_email
 
 - name: Configure backups models
   template:
