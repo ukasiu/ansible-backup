@@ -10,25 +10,25 @@ backup_setup:
 
 backup_config_chunks: 250
 
-backup_databases:
-  PostgreSQL:
-    host: "localhost"
-    port: 5432
-    username: "postgres"
-    password: "postgres"
-  MongoDB:
-    username: 'admin'
-    password: 'password'
-    host: 'localhost'
-    port: 27017
-    ipv6: 'false'
-    lock: 'true'
-    additional_options: "[]"
-  MySQL:
-    host: "localhost"
-    port: 3306
-    username: "root"
-    password: "root"
+backup_databases: {}
+  # PostgreSQL:
+  #   host: "localhost"
+  #   port: 5432
+  #   username: "postgres"
+  #   password: "postgres"
+  # MongoDB:
+  #   username: 'admin'
+  #   password: 'password'
+  #   host: 'localhost'
+  #   port: 27017
+  #   ipv6: 'false'
+  #   lock: 'true'
+  #   additional_options: "[]"
+  # MySQL:
+  #   host: "localhost"
+  #   port: 3306
+  #   username: "root"
+  #   password: "root"
 
 backup_encryption: []
 
@@ -36,10 +36,10 @@ backup_store: []
 
 backup_notifier: []
 
-backup_jobs:
-  job:
-    schedule: ""
-    keep: ""
+backup_jobs: {}
+  # job:
+  #   schedule: ""
+  #   keep: ""
 
 backup_ruby_package: ruby2.3
 backup_ruby_dev_package: ruby2.3-dev

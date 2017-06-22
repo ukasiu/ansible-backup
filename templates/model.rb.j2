@@ -1,6 +1,9 @@
 {% set backup = item.value -%}
 
-TemplateModel.new(:{{ item.key }}, "{{ microservice_name }} {{ microservice_env }}") do
+require '{{ backup_setup.config_dir }}/cli_s3_syncer.rb'
+
+
+TemplateModel.new(:{{ item.key }}, "{{ item.key }} {{ host_env }}") do
 {% if backup_store.SFTP is defined %}
   store_with SFTP do |server|
     server.keep       = "{{ backup.keep }}"
@@ -64,6 +67,47 @@ TemplateModel.new(:{{ item.key }}, "{{ microservice_name }} {{ microservice_env 
 {% for database in backup.mysql %}
   database MySQL, :{{ database.label }} do |db|
     db.name               = "{{ database.name }}"
+    {% if database.skip_tables is defined %}
+    db.skip_tables        = %w{ {{ database.skip_tables | join(' ') }} }
+    {% endif %}
+  end
+{% endfor %}
+{% endif %}
+
+{% if backup.S3_sync is defined %}
+{% for dirset in backup.S3_sync %}
+  sync_with Cloud::S3 do |s3|
+    s3.path = "{{ dirset.path }}"
+    s3.directories do |directory|
+      {% for dir in dirset.dirs %}
+      directory.add "{{ dir }}"
+      {% endfor %}
+      
+      {% if dirset.exclude is defined %}
+      {% for dir in dirset.exclude %}
+      directory.exclude "{{ dir }}"
+      {% endfor %}
+      {% endif %}
+    end
+  end
+{% endfor %}
+{% endif %}
+
+{% if backup.S3_CLI_sync is defined %}
+{% for dirset in backup.S3_CLI_sync %}
+  sync_with 'Cloud::CliS3Syncer' do |s3|
+    s3.path = "{{ dirset.path }}"
+    s3.directories do |directory|
+      {% for dir in dirset.dirs %}
+      directory.add "{{ dir }}"
+      {% endfor %}
+      
+      {% if dirset.exclude is defined %}
+      {% for dir in dirset.exclude %}
+      directory.exclude "{{ dir }}"
+      {% endfor %}
+      {% endif %}
+    end
   end
 {% endfor %}
 {% endif %}
