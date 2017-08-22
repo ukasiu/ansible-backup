@@ -28,6 +28,7 @@
     - flex
     - gettext
     - ncurses-dev
+    - python-pip
     - zlib1g-dev
 
 - name: Install gem backup
